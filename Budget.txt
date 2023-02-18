@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Budget Calculator</title>
+</head>
+<body>
+	<h1>Budget Calculator for Video Production</h1>
+	<form>
+		<label for="time">Time Length of Final Video:</label>
+		<input type="number" id="time" name="time" min="0" max="20" step="1" required> minutes<br><br>
+		
+		<label for="3d">3D Content:</label>
+		<input type="number" id="3d" name="3d" min="0" max="100" oninput="updateTotal()" required> %<br><br>
+
+		<label for="2d">2D Animation:</label>
+		<input type="number" id="2d" name="2d" min="0" max="100" oninput="updateTotal()" required> %<br><br>
+
+		<label for="footage">Real Footage Editing:</label>
+		<input type="number" id="footage" name="footage" min="0" max="100" oninput="updateTotal()" required> %<br><br>
+
+		<label for="compositing">Compositing:</label>
+		<input type="number" id="compositing" name="compositing" min="0" max="100" oninput="updateTotal()" required> %<br><br>
+
+		<label for="sound">Sound Design:</label>
+		<input type="number" id="sound" name="sound" min="0" max="100" oninput="updateTotal()" required> %<br><br>
+
+		<button type="button" onclick="updateTotal()">Generate Budget</button>
+
+		<label for="total">Total Cost:</label>
+		<input type="text" id="total" name="total" readonly>
+	</form>
+
+	<script>
+		function updateTotal() {
+			var time = document.getElementById("time").value;
+			var hours = time * 40;
+			var percent3d = document.getElementById("3d").value;
+			var percent2d = document.getElementById("2d").value;
+			var percentFootage = document.getElementById("footage").value;
+			var percentCompositing = document.getElementById("compositing").value;
+			var percentSound = document.getElementById("sound").value;
+
+			var value3d = 25 * percent3d / 100;
+			var value2d = 18 * percent2d / 100;
+			var valueFootage = 12 * percentFootage / 100;
+			var valueCompositing = 15 * percentCompositing / 100;
+			var valueSound = 12 * percentSound / 100;
+
+			var total = (value3d + value2d + valueFootage + valueCompositing + valueSound) * hours;
+
+			document.getElementById("total").value = total.toFixed(2) + "€";
+		}
+	</script>
+</body>
+</html>
